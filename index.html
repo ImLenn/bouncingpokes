@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bouncing PNG</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+    img {
+      position: absolute;
+      width: 100px;
+      height: auto;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <img id="dvd" src="https://64.media.tumblr.com/805db6fc6df3dbef2516be1328cd788d/9e1b24b6f7503d8f-3e/s250x400/a622eeac0d2b25f3e7b74f15f9497bd46378c818.pnj" />
+
+  <script>
+    const images = [
+      "https://64.media.tumblr.com/805db6fc6df3dbef2516be1328cd788d/9e1b24b6f7503d8f-3e/s250x400/a622eeac0d2b25f3e7b74f15f9497bd46378c818.pnj",
+      "https://64.media.tumblr.com/be010d85ecb0eccadb35f1184a932f0e/9e1b24b6f7503d8f-69/s250x400/dd98496e8f3bc264a611506721a99bf42074d11a.pnj",
+      "https://64.media.tumblr.com/4661db3ee87ae46776faa2dc02e5b9f9/9e1b24b6f7503d8f-4c/s250x400/b332c5fcf1efaa8be001fcbcf19cf3e2494f6e44.pnj",
+      "https://64.media.tumblr.com/206aeceafb09a1ee821d346959620974/9e1b24b6f7503d8f-50/s250x400/00db2980f142091e888579635bdf072a7993dba8.pnj",
+      "https://64.media.tumblr.com/e54614985dfb6635cc20bed4074edcfd/9e1b24b6f7503d8f-c9/s250x400/813381473f4b04675fa46f6b7375dd619b0c08ba.pnj",
+      "https://64.media.tumblr.com/6e4471e2195e571309266dc18116b607/9e1b24b6f7503d8f-22/s250x400/5264b4990c878a58fb379c7edb4ab99745523af4.pnj",
+      "https://64.media.tumblr.com/eada48ba239f3555da91ce92659292fb/9e1b24b6f7503d8f-99/s250x400/c81d46a056ee3f0344852be1985f3b23d1c89acc.pnj",
+      "https://64.media.tumblr.com/2da32c8c200f2ff1ef5db2958dcaa5e8/9e1b24b6f7503d8f-ab/s250x400/0654c021d2db28cc3ac041b577a9edbe512afe33.pnj",
+      "https://64.media.tumblr.com/3253391d31ba73129048085aad1b03ee/9e1b24b6f7503d8f-34/s250x400/c7d280c5742d077c2c8028b56032274e6daa99d0.pnj",
+      "https://64.media.tumblr.com/8c8feca6aa1d6d67a667371d47f29307/9e1b24b6f7503d8f-3c/s250x400/2f0a8ee4d5b4a8c184efdb52b2243095e7035075.pnj",
+      "https://64.media.tumblr.com/fb27ac8587e5565c05c8c6c757e2118b/9e1b24b6f7503d8f-6a/s250x400/7b1768d1cc066337a7afdfb9f0fdcde4b9171099.pnj",
+      "https://64.media.tumblr.com/2ed9460feafe09ff7c481a62ca71be64/9e1b24b6f7503d8f-27/s250x400/f6737fff791979ed6c0134af28dbac5ae08453ef.pnj",
+      "https://64.media.tumblr.com/6d81c870784e6d2d63152462bcd750e1/9e1b24b6f7503d8f-0d/s250x400/6ee77a431e2b2f06bf72648e40244ec18f515718.pnj",
+      "https://64.media.tumblr.com/53b2208539cd4fb4eb039fa61fbdb0da/9e1b24b6f7503d8f-7a/s250x400/c074b8136325fff56c031861ddf02d7af820e2d8.pnj",
+      "https://64.media.tumblr.com/f7743eba7981da92e0616740ff58cfbe/9e1b24b6f7503d8f-ef/s250x400/f889d4931933da06b8c71ec3cf357dc7b1e553e1.pnj",
+      "https://64.media.tumblr.com/f06b3d11615d300d4fd088e3fc7a0445/9e1b24b6f7503d8f-06/s250x400/14d459c59d6dfe5214f4d0e968b08fcba489d94b.pnj",
+      "https://64.media.tumblr.com/b37f94f21d021790667af87e658a38bb/9e1b24b6f7503d8f-2a/s250x400/1b46ade1123283373159f0d2fd537c501d628667.pnj",
+      "https://64.media.tumblr.com/430af182b123b858fb2a406b63fe87a0/9e1b24b6f7503d8f-9d/s250x400/6d6a0ae24f34cf30481d9a42a61bb0d92a4f5524.pnj",
+      "https://64.media.tumblr.com/b59091a0b2039f3d417203c730e44a06/9e1b24b6f7503d8f-7b/s250x400/ad3c0e1261d2fee58100ac4a2d1a1eb643f261c5.pnj",
+      "https://64.media.tumblr.com/799022aeac3dced7d9ec21583a458d80/9e1b24b6f7503d8f-39/s250x400/035e1e941dd45203cfd1fdc064788ccd93906d90.pnj",
+      "https://64.media.tumblr.com/07c3cdb61cb254f39eac7d58054fd8f8/9e1b24b6f7503d8f-10/s250x400/cc890959b37f40972cafb6121e236a4f32c8a83c.pnj",
+      "https://64.media.tumblr.com/f7c3fc5f487e31b3635ae86bb56bbf45/9e1b24b6f7503d8f-41/s250x400/8f70b6bf230556f7e5ca1b1694f5879cbc898a24.pnj",
+      "https://64.media.tumblr.com/5e7ac8535bd22a9789dbfdf14347f5ef/9e1b24b6f7503d8f-6e/s250x400/040dd3d8cc62759dfd20b2d469adad88d8727634.pnj",
+      "https://64.media.tumblr.com/7635ab5065a1e5688dd9fe94322326d9/9e1b24b6f7503d8f-d8/s250x400/7bf172cb2d942c0f5860c3f3993982f7569cc589.pnj"
+    ];
+
+    const img = document.getElementById("dvd");
+    let x = 100;
+    let y = 100;
+    let dx = 2;
+    let dy = 2;
+    const imgWidth = 100;
+    const imgHeight = 100;
+
+    function getRandomImage() {
+      let newImg;
+      do {
+        newImg = images[Math.floor(Math.random() * images.length)];
+      } while (!newImg || newImg === img.src);
+      return newImg;
+    }
+
+    function move() {
+      x += dx;
+      y += dy;
+
+      let bounced = false;
+
+      if (x + imgWidth >= window.innerWidth || x <= 0) {
+        dx = (dx > 0 ? -1 : 1) * (Math.random() * 2 + 1);
+        bounced = true;
+      }
+
+      if (y + imgHeight >= window.innerHeight || y <= 0) {
+        dy = (dy > 0 ? -1 : 1) * (Math.random() * 2 + 1);
+        bounced = true;
+      }
+
+      if (bounced) {
+        img.src = getRandomImage();
+      }
+
+      img.style.left = x + "px";
+      img.style.top = y + "px";
+
+      requestAnimationFrame(move);
+    }
+
+    img.addEventListener("click", () => {
+      img.src = getRandomImage();
+    });
+
+    move();
+  </script>
+</body>
+</html>
