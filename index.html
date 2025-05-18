@@ -16,6 +16,7 @@
       height: auto;
       pointer-events: auto;
       cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
@@ -33,7 +34,7 @@
       "https://64.media.tumblr.com/eada48ba239f3555da91ce92659292fb/9e1b24b6f7503d8f-99/s250x400/c81d46a056ee3f0344852be1985f3b23d1c89acc.pnj",
       "https://64.media.tumblr.com/2da32c8c200f2ff1ef5db2958dcaa5e8/9e1b24b6f7503d8f-ab/s250x400/0654c021d2db28cc3ac041b577a9edbe512afe33.pnj",
       "https://64.media.tumblr.com/3253391d31ba73129048085aad1b03ee/9e1b24b6f7503d8f-34/s250x400/c7d280c5742d077c2c8028b56032274e6daa99d0.pnj",
-      "https://64.media.tumblr.com/8c8feca6aa1d6d67a667371d47f29307/9e1b24b6f7503d8f-3c/s250x400/2f0a8ee4d5b4a8c184efdb52b2243095e7035075.pnj",
+      "https://64.media.tumblr.com/8c8feca6aa1d6d67a667371d47f29307c/9e1b24b6f7503d8f-3c/s250x400/2f0a8ee4d5b4a8c184efdb52b2243095e7035075.pnj",
       "https://64.media.tumblr.com/fb27ac8587e5565c05c8c6c757e2118b/9e1b24b6f7503d8f-6a/s250x400/7b1768d1cc066337a7afdfb9f0fdcde4b9171099.pnj",
       "https://64.media.tumblr.com/2ed9460feafe09ff7c481a62ca71be64/9e1b24b6f7503d8f-27/s250x400/f6737fff791979ed6c0134af28dbac5ae08453ef.pnj",
       "https://64.media.tumblr.com/6d81c870784e6d2d63152462bcd750e1/9e1b24b6f7503d8f-0d/s250x400/6ee77a431e2b2f06bf72648e40244ec18f515718.pnj",
@@ -72,13 +73,25 @@
 
       let bounced = false;
 
-      if (x + imgWidth >= window.innerWidth || x <= 0) {
-        dx = (dx > 0 ? -1 : 1) * (Math.random() * 2 + 1);
+      // Horizontal collision
+      if (x + imgWidth >= window.innerWidth) {
+        dx = -Math.abs(dx) * (Math.random() * 2 + 1);
+        x = window.innerWidth - imgWidth;
+        bounced = true;
+      } else if (x <= 0) {
+        dx = Math.abs(dx) * (Math.random() * 2 + 1);
+        x = 0;
         bounced = true;
       }
 
-      if (y + imgHeight >= window.innerHeight || y <= 0) {
-        dy = (dy > 0 ? -1 : 1) * (Math.random() * 2 + 1);
+      // Vertical collision
+      if (y + imgHeight >= window.innerHeight) {
+        dy = -Math.abs(dy) * (Math.random() * 2 + 1);
+        y = window.innerHeight - imgHeight;
+        bounced = true;
+      } else if (y <= 0) {
+        dy = Math.abs(dy) * (Math.random() * 2 + 1);
+        y = 0;
         bounced = true;
       }
 
@@ -97,6 +110,9 @@
     });
 
     move();
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
